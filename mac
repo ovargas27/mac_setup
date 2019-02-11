@@ -117,8 +117,58 @@ cask "slack"
 cask "google-chrome"
 cask "1password"
 cask "docker"
+
+# Ruby dependencies
+brew "automake"
+brew "bison"
+brew "readline"
+brew "libyaml"
+brew "gdbm"
+brew "libffi"
+
+# Ruby
+brew "chruby"
 EOF
 
+install_ruby_2_3() {
+  if ls $HOME/.rubies | grep -Fq "ruby-2.3.7"; then
+    echo "... Ruby 2.3.7 already installed"
+  else
+    echo "... Installing Ruby 2.3.7"
+    cd "tmp"
+    curl --remote-name "https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.7.tar.bz2"
+    tar -xjvf "ruby-2.3.7.tar.bz2"
+    cd "ruby-2.3.7"
+    ./configure --prefix="$HOME/.rubies/ruby-2.3.7" --with-opt-dir="$(brew --prefix openssl):$(brew --prefix readline):$(brew --prefix libyaml):$(brew --prefix gdbm):$(brew --prefix libffi) --disable-install-doc"
+    make -j2
+    make install
+    cd "../"
+    rm -rf "ruby-2.3.7"
+    rm "ruby-2.3.7.tar.bz2"
+    cd "../"
+  fi
+}
+install_ruby_2_2() {
+  if ls $HOME/.rubies | grep -Fq "ruby-2.2.9"; then
+    echo "... Ruby 2.2.9 already installed"
+  else
+    echo "... Installing Ruby 2.2.9"
+    cd "tmp"
+    curl --remote-name "https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.9.tar.bz2"
+    tar -xjvf "ruby-2.2.9.tar.bz2"
+    cd "ruby-2.2.9"
+    ./configure --prefix="$HOME/.rubies/ruby-2.2.9" --with-opt-dir="$(brew --prefix openssl):$(brew --prefix readline):$(brew --prefix libyaml):$(brew --prefix gdbm):$(brew --prefix libffi) --disable-install-doc"
+    make -j2
+    make install
+    cd "../"
+    rm -rf "ruby-2.2.9"
+    rm "ruby-2.2.9.tar.bz2"
+    cd "../"
+  fi
+}
+
+install_ruby_2_3
+install_ruby_2_2
 
 if [ -f "$HOME/.laptop.local" ]; then
   fancy_echo "Running your customizations from ~/.laptop.local ..."
