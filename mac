@@ -132,9 +132,9 @@ EOF
 
 install_ruby_2_3() {
   if ls $HOME/.rubies | grep -Fq "ruby-2.3.7"; then
-    echo "... Ruby 2.3.7 already installed"
+    fancy_echo "... Ruby 2.3.7 already installed"
   else
-    echo "... Installing Ruby 2.3.7"
+    fancy_echo "... Installing Ruby 2.3.7"
     cd "tmp"
     curl --remote-name "https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.7.tar.bz2"
     tar -xjvf "ruby-2.3.7.tar.bz2"
@@ -150,9 +150,9 @@ install_ruby_2_3() {
 }
 install_ruby_2_2() {
   if ls $HOME/.rubies | grep -Fq "ruby-2.2.9"; then
-    echo "... Ruby 2.2.9 already installed"
+    fancy_echo "... Ruby 2.2.9 already installed"
   else
-    echo "... Installing Ruby 2.2.9"
+    fancy_echo "... Installing Ruby 2.2.9"
     cd "tmp"
     curl --remote-name "https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.9.tar.bz2"
     tar -xjvf "ruby-2.2.9.tar.bz2"
