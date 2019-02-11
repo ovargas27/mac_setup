@@ -104,6 +104,7 @@ brew update --force # https://github.com/Homebrew/brew/issues/1151
 brew bundle --file=- <<EOF
 tap "caskroom/cask"
 tap "heroku/brew"
+tap "homebrew/services"
 
 # Unix
 brew "git"
@@ -111,6 +112,9 @@ brew "openssl"
 brew "tmux"
 brew "vim"
 brew "zsh"
+
+# Databases
+brew "mysql@5.7"
 
 # Apps
 cask "slack"
